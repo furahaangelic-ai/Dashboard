@@ -18,14 +18,82 @@ function displayWeather(weather) {
         <div class = "weather-temp">${weather.temperature}°F</div>
         <div class = "weather-condition">${weather.condition}</div>
         <div class = "location">${weather.location}</div>
-        <div class = 
         </div>`;
         
-}.  
+}
 
 function displayWeatherError() {
     document.getElementById('weather-display').innerHTML = `
-       <p class ="widget-error">Weather data is unavailable right now.</p>`;
+       <p class ="widget-error">weather data is unavailable right now.</p>`;
 }
 
+function displayQuotesError() {
+    document.getElementById('quotes-display').innerHTML = `
+       <p class ="widget-error">quotes are unavailable right now.</p>`;
+}
+
+
+let allQuotes = [];
+
+let currentQuoteIndex = -1;
+const quoteButton = document.getElementById('new-quote-btn');
+function displayRandomQuote() {
+    const display = document.getElementById('quotes-display');
+    if (allQuotes.length === 0) {
+        display.innerHTML = `<p class="widget-error">No quotes to show.</p>`;
+        return;
+    }
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * allQuotes.length);
+    } while (randomIndex === currentQuoteIndex && allQuotes.length > 1);
+    currentQuoteIndex = randomIndex;
+
+
+    const quote = allQuotes[currentQuoteIndex];
+    display.innerHTML = `
+        <div class="quote-card">
+            <div class="quote-text">"${quote.text}"</div>
+            <div class="quote-author">— ${quote.author}</div>
+        </div>`;
+}
+
+
+quoteButton.addEventListener('click', displayRandomQuote);
+
+function loadQuotes() {
+    fetch(`./data/quotes.json`)
+        .then(response => response.json())
+        .then(data => {
+            allQuotes = data;
+            displayRandomQuote();
+
+            if (allQuotes.length >0) {
+                quoteButton.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error("Error loading quotes:", error);
+            displayQuotesError();
+        });
+}
+
+function initializeTheme() {
+    if (localStorage.getItem('dashboardTheme') === 'dark') {
+        document.body.classList.add('theme-dark');
+    }
+}
+
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('theme-dark');
+    if (isDark) {
+        localStorage.setItem('dashboardTheme', 'dark');
+    } else {
+        localStorage.setItem('dashboardTheme', 'light');
+    }
+}
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+initializeTheme();
+
 loadWeather();
+loadQuotes();

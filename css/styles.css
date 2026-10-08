@@ -1,0 +1,132 @@
+/* ==========================
+   1. RESET
+   ========================== */
+* {
+   box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+p {
+   margin: 0;
+}
+
+/* ==========================
+   2. DESIGN TOKENS
+   ========================== */
+:root {
+   --color-accent: #4d1979;
+   --color-accent-strong: #321052;
+   --color-text: #172033;
+   --color-muted: #657186;
+   --color-border: #d9dfeb;
+   --color-bg: #f7f8fb;
+   --color-surface: #ffffff;
+   --color-surface-alt: #f1f5f9;
+   --color-danger: #b42318;
+   --space-sm: 0.5rem;
+   --space-md: 1rem;
+   --space-lg: 1.5rem;
+   --radius-md: 0.5rem;
+   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+   --color-success-dark: #166534;
+   --color-success: #6ee7a0;
+
+}
+
+body.theme-dark {
+   --color-bg: #141a26;
+   --color-surface: #1f2937;
+   --color-surface-alt: #273142;
+   --color-text: #f7fafc;
+   --color-muted: #a9b4c4;
+   --color-border: #2c3648;
+   --color-accent: #c9a9f0;
+   --color-accent-strong: #e2d1f7;
+   --color-danger: #f97066;
+   --shadow-sm: 0 2px 8px rgba(0, 0, 0, .3);
+}
+
+/* ==========================
+   3. BASE
+   ========================== */
+body {
+   font-family: Arial, sans-serif;
+   background-color: var(--color-bg);
+   color: var(--color-text);
+   line-height: 1.5;
+}
+
+/* ==========================
+   4. LAYOUT
+   ========================== */
+main {
+   max-width: 1000px;
+   margin: 0 auto;
+   padding: var(--space-lg);
+}
+
+/* ==========================
+   5. HEADER
+   ========================== */
+header {
+   background-color: var(--color-accent);
+   color: var(--color-surface);
+   text-align: center;
+   padding: 2rem var(--space-lg);
+}
+
+header h1 {
+   margin-bottom: var(--space-md);
+}
+
+/* ==========================
+   6. WIDGETS
+   ========================== */
+section {
+   margin-bottom: 2rem;
+}
+
+.widget {
+   background-color: var(--color-surface);
+   padding: var(--space-lg);
+   border-radius: var(--radius-md);
+   box-shadow: var(--shadow-sm);
+}
+
+h2 {
+   margin-bottom: var(--space-md);
+}
+
+.widget-error {
+   color: var(--color-danger);
+}
+
+/* ==========================
+   7. BUTTONS
+   ========================== */
+button {
+   font: inherit;
+   padding: var(--space-sm) var(--space-lg);
+   border: none;
+   border-radius: var(--radius-md);
+   cursor: pointer;
+}
+button{
+   background-color: var(--color-accent);
+   color: var(--color-surface);
+}
+
+button:hover {
+   background-color: var(--color-accent-strong);
+}
+
+header button {
+   border: 1px solid var(--color-surface);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
